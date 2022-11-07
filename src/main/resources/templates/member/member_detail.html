@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+        <link rel="stylesheet" href="member/login.css">
+    <link rel="stylesheet" href="member/base.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<header>
+        <div>
+            <a href="/main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
+        </div>
+        <section class="head">
+            <ul>
+                <li><a href="hotelinfo.html" th:href="@{hotelinfo}">호텔 정보</a></li>
+            </ul>
+            <ul>
+                <li><a href="roominfo.html" th:href="@{roominfo}">객실 정보</a></li>
+            </ul>
+            <ul>
+                <th:block th:if="${session.member == null}">
+        				<li><a th:href="@{/login}">로그인</a></li>
+    				</th:block>
+    				<th:block th:if="${session.member != null}">
+        				<p>
+        			
+				            <li><a th:href="@{/memberdetail}">[[${session.member.name}]]</a>님, 환영합니다.<a th:href="@{/logout}"><br>로그아웃</a></li>
+				        </p>
+    				</th:block>
+            </ul>
+            <ul>
+                <li><a href="">예약 확인</a></li>
+            </ul>
+            <ul>
+                <li><a href="map.html" th:href="map">오시는 길</a></li>
+            </ul>
+            <ul>
+                <li><a href="qna.html" th:href="@{qna}">Q & A</a></li>
+            </ul>
+        </section>
+    </header>
+    <hr>
+    <table>
+        <span>아이디: </span><span th:text="${member.id}"></span><br><br>
+        <span>이름: </span><span th:text="${member.name}"></span><br><br>
+        
+        <span>비밀번호</span><br/>
+		<input id="inputNewPw" type="text"></input>
+        <button type="button" id="updatePwBtn">비밀번호 변경</button><br><br>
+        
+        <span>이메일</span><br>
+        <input id="inputNewEmail" type="text" th:value="${member.email}"></input>
+        <button type="button" id="updateEmailBtn">이메일 변경</button><br><br>
+        		        
+        <span>전화번호</span><br>
+        <input id="inputNewTell" type="text" th:value="${member.tell}"></input>
+        <button type="button" id="updateTellBtn">전화번호 변경</button><br>
+                
+    </table>
+    
+
+    <script>
+
+    	var inputNewPw = document.getElementById('inputNewPw');
+    	var inputNewEmail = document.getElementById('inputNewEmail');
+    	var inputNewTell = document.getElementById('inputNewTell');
+
+    	
+    	inputNewPw.addEventListener('focusin', function(){
+    		inputNewPw.value = null;
+    	})
+    	
+    	inputNewEmail.addEventListener('focusin', function(){
+    		inputNewEmail.value = null;
+    	})
+    	
+    	inputNewTell.addEventListener('focusin', function(){
+    		inputNewTell.value = null;
+    	})
+    	
+  
+    	/*
+        //foucusout
+    	inputNewPw.addEventListener('focusout', function(){
+    		inputNewPw.value = [[${member.pw}]];
+    	})
+    	
+    	inputNewEmail.addEventListener('focusout', function(){
+    		inputNewEmail.value = [[${member.email}]];
+    	})
+    	
+    	inputNewTell.addEventListener('focusout', function(){
+    		inputNewTell.value = [[${member.tell}]];
+    	})
+    	*/
+    	
+    	
+    	
+    	
+    	
+    	//비밀번호 변경
+    	var updatePwBtn = document.getElementById('updatePwBtn');
+    	
+    	updatePwBtn.onclick = function(){
+    		var inputNewPw = document.getElementById('inputNewPw');
+    		
+    		if(inputNewPw.value == ''){
+    			alert('변경할 내용이 없습니다.');
+    			window.location.reload();
+    			
+    		}else{
+    		
+	    		$.ajax({
+	    			url: '/updatePw',
+	    			data: {
+	    				inputNewPw: $('#inputNewPw').val()
+	    			},
+	
+	    			success:
+	    				function(result){
+	    				
+							if(result == 'same'){
+								alert('현재 사용중인 비밀번호입니다.');
+								window.location.reload();
+								
+							}else if(result == 'regex') {
+		    					alert('8-16자의 영문 대/소문자, 숫자, 특수문자를 사용하세요.');
+		    					window.location.reload();
+		    					
+		    				}else if(result == 'true') {
+		    					alert('비밀번호 변경 완료');
+		    					window.location.reload();
+		    				}
+		    					
+	    				},
+	    				
+	    			error: function( xhr ) {
+			    		 console.log( xhr );
+			    		 alert(xhr.status + ':' + xhr.statusText);
+	    			
+	    			}	
+	    				
+	    		})
+    		}
+    	}
+    	
+    	//이메일 변경
+    	var updateEmailBtn = document.getElementById('updateEmailBtn');
+    	
+    	updateEmailBtn.onclick = function(){
+    		$.ajax({
+    			url: '/updateEmail',
+    			data: {
+    				inputNewEmail: $('#inputNewEmail').val()
+    			},
+
+    			success:
+    				function(result){
+    				
+						if(result == 'same'){
+							alert('현재 사용중인 이메일입니다.');
+							window.location.reload();
+							
+						}else if(result == 'regex') {
+	    					alert('이메일 주소를 다시 확인해주세요.');
+	    					window.location.reload();
+	    					
+	    				}else if(result == 'true') {
+	    					alert('이메일 변경 완료');
+	    					window.location.reload();
+	    				}
+						
+    				},
+    				
+    			error: function( xhr ) {
+		    		 console.log( xhr );
+		    		 alert(xhr.status + ':' + xhr.statusText);
+    			
+    			}	
+    				
+    		})
+    	}
+    	
+    	
+    	
+    	//전화번호 변경
+      	var updateTellBtn = document.getElementById('updateTellBtn');
+    	
+      	updateTellBtn.onclick = function(){
+    		$.ajax({
+    			url: '/updateTell',
+    			data: {
+    				inputNewTell: $('#inputNewTell').val()
+    			},
+
+    			success:
+    				function(result){
+    				
+						if(result == 'same'){
+							alert('현재 사용중인 전화번호입니다.');
+							window.location.reload();
+							
+						}else if(result == 'regex') {
+	    					alert('형식에 맞지 않는 전화번호입니다.');
+	    					window.location.reload();
+	    					
+	    				}else if(result == 'true') {
+	    					alert('전화번호 변경 완료');
+	    					window.location.reload();
+	    				}
+    				},
+    				
+    			error: function( xhr ) {
+		    		 console.log( xhr );
+		    		 alert(xhr.status + ':' + xhr.statusText);
+    			
+    			}	
+    				
+    		})
+    	}
+    	
+
+    
+    	
+
+
+    
+    </script>
+    
+    
+</body>
+</html>

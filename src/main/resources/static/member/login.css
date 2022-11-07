@@ -1,0 +1,92 @@
+
+.body{
+    display: block;
+    margin-top: 150px;
+    position: relative;
+}
+.body div{position: relative;
+    text-align: center;}
+.body div h2{}
+.body div p{}
+.body div p input{block-size: 35px; inline-size: 210px; border-radius: 4px;
+border: 1px solid gray;
+font-size: 12px;}
+
+#userid{
+    margin-left: 12px;
+    margin-bottom: 15px;
+}
+#password{ 
+    margin-left: 12px;
+    margin-bottom: 30px;
+}
+
+.body div p{
+    position: relative;
+}
+.body div p span{
+    block-size: 40px;
+    inline-size: 280px;
+    background-color: darkgray;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    left: 42%;
+}
+.body div p span a{
+    
+    text-decoration: none;
+    background-size: 200px;
+    color: aliceblue;
+    font-size: 15px;
+    line-height: 40px;
+}
+
+.body div p span a:hover{
+    cursor: pointer;
+}
+
+.body div p button{
+    background-color: gainsboro;
+    display: inline-block;
+    border-radius: 4px;
+    border:none;
+    block-size: 40px;
+    inline-size: 280px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+footer hr{
+    margin-top: 70px;
+    border-width: 1px;
+    width: 30%;
+    border-radius: 20px;
+    border-color: gray;
+}
+
+footer{}
+
+footer div{
+    position: relative;
+}
+
+footer div span{
+    display: inline-block;
+    text-align: center;
+}
+
+footer div span a{
+    text-decoration: none;
+    background-color: rgb(241,196,15);
+    color: black;
+    display: inline-block;
+    block-size: 40px;
+    inline-size: 280px;
+    margin-top: 20px; 
+    line-height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}

@@ -1,0 +1,221 @@
+.body {
+    text-align: center;
+}
+
+.body h2 {
+    margin-bottom: 50px;
+}
+
+.body li {
+    display: inline;
+    margin-left: 70px;
+    padding-bottom: 20px;
+}
+
+.slick-prev {
+    top: 50%;
+    z-index: 100;
+    font-size: 0;
+
+}
+
+.slick-next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 100;
+    font-size: 0;
+}
+
+.slick-arrow {
+    position: absolute;
+    border: none;
+    border-radius: 5px;
+}
+
+.slick-prev:before {
+    content: "\f053";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    font-size: 50px;
+    color: #fff;
+    transition: 0.3s;
+    position: absolute;
+    left: 50px;
+    cursor: pointer;
+}
+
+.slick .slick-prev:hover:before {
+    color: skyblue;
+}
+
+.slick .slick-next::before {
+    content: "\f054";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 50px;
+    color: #fff;
+    transition: 0.3s;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.slick .slick-next:hover:before {
+    color: skyblue;
+}
+
+.slick {
+    position: absolute;
+    width: 1150px;
+    padding-left: 300px;
+    inline-size: 1600px;
+}
+
+.slick-wrap>img {}
+
+img {
+    height: 700px;
+    width: 1300px;
+
+}
+
+[role=presentation]>button {
+    position: absolute;
+    top: 0;
+    border: none;
+}
+
+
+.slick-text {
+    position: absolute;
+    top: 250px;
+    left: 370px;
+    color: black;
+    font-weight: bold;
+    width: 1100px;
+}
+
+.slick-text li {}
+
+
+#slick-slide-control00 {
+    left: 27.3%;
+    padding-right: 8.1%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+#slick-slide-control01 {
+    left: 40.2%;
+    padding-right: 7%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+#slick-slide-control02 {
+    left: 51.7%;
+    padding-right: 7.4%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+#slick-slide-control03 {
+    left: 63.5%;
+    padding-right: 6.2%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+#slick-slide-control04 {
+    left: 74.2%;
+    padding-right: 6.3%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+#slick-slide-control05 {
+    left: 84.9%;
+    padding-right: 5.8%;
+    top: 4%;
+    z-index: 100;
+    font-size: 0;
+    block-size: 3%;
+    background: rgba(0, 0, 0, 0.001);
+    cursor: pointer;
+}
+
+
+.slick-active button {
+    border-bottom: 3px solid #fff;
+    border-radius: 10px;
+    border-color: #fff;
+    transition: 0.3s;
+}
+
+#foot_header{
+    position: absolute;
+    font-size: 30px;
+    left: 308px;
+    font-weight: bold;
+    bottom: 15px;
+    color: #fff;
+    box-shadow: 3px;
+    transition: 0.3s;
+    background: rgba(0,0,0,0.5);
+    block-size: 120px;
+    padding-top: 30px;
+    inline-size: 1300px;
+
+}
+
+#foot_subtext{
+    position: absolute;
+    bottom: 50px;
+    left: 620px;
+    color: #fff;
+}
+
+.foot_roominfo{
+    block-size: 500px;
+
+}
+
+.roominfo_room h3{
+    position: absolute;
+    left: 400px;
+}
+
+.roominfo_room div{}
+.roominfo_room div tr{}
+.roominfo_room div tr td{}
+
+
+.room1{background-color: bisque;}
+
+.room1 ol{}
+.room1 ol li{}
+.room1 ol li span{}
+
+.room2{background-color: blanchedalmond;}
+.room3{ background-color: aqua;}

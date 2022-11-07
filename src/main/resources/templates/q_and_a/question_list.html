@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/question/qna.css">
+    <link rel="stylesheet" href="/question/admin_qna.css">
+    <link rel="stylesheet" href="../main/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="main.html" th:href="@{../main}"><h1>THE HOTEL</h1></a>
+        </div>
+        <section class="head">
+            <ul>
+                <li><a href="hotelinfo.html" th:href="@{../hotelinfo}">호텔 정보</a></li>
+            </ul>
+            <ul>
+                <li><a href="roominfo.html" th:href="@{../roominfo}">객실 정보</a></li>
+            </ul>
+            <ul>
+                <th:block th:if="${session.member == null}">
+        				<li><a th:href="@{/login}">로그인</a></li>
+    				</th:block>
+    				<th:block th:if="${session.member != null}">
+        				<p>
+        			
+				            <li><a th:href="@{/memberdetail}">[[${session.member.name}]]</a>님, 환영합니다.<a th:href="@{../logout}"><br>로그아웃</a></li>
+				        </p>
+    				</th:block>
+            </ul>
+            <ul>
+                <li><a href="">예약 확인</a></li>
+            </ul>
+            <ul>
+                <li><a href="map.html" th:href="@{../map}">오시는 길</a></li>
+            </ul>
+            <ul>
+                <li><a href="qna.html" th:href="@{list}">Q & A</a></li>
+            </ul>
+        </section>
+    </header>
+    <hr>
+	<div layout:fragment="content" class="wrap">
+	    <table class="table">
+	        <thead class="table-dark QandA" border="1">
+	            <tr>
+	                <th class="one">No.</th>
+                    <th class="two">ID</th>
+                    <th class="three">Title</th>
+                    <th class="four">Date</th>
+                    <th class="five">답변</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="question, loop : ${questionList}">
+	                <td th:text="${loop.count}"></td>
+	                <td th:text="${question.id}"></td>
+	                <td>
+	                    <a th:href="@{question.questionNo}" th:text="${question.title}"></a>
+	                </td>
+	                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+	            </tr>
+	            
+	        </tbody>
+	        
+	    </table>
+	    <tfoot>
+                <tr >
+	            	<th:block th:if="${session.member != null}">
+       					<td><a th:href="@{/question/create}">질문추가</a></td>
+     				</th:block>
+     				<th:block th:if="${session.member == null}">
+        				<span> 질문은 로그인 후 가능합니다</span>
+    				</th:block>
+	               
+	            </tr>
+            </tfoot>
+	</div>
+</html>

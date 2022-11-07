@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}">
+	<div layout:fragment="content" class="container my-3">
+	    <table class="table">
+	        <thead class="table-dark">
+	            <tr>
+	                <th>No</th>
+	                <th>Name</th>
+	                <th>Title</th>
+	                <th>Date</th>
+	                <th>답변</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="question, loop : ${questionList}">
+	                <td th:text="${loop.count}"></td>
+	                <td>
+	                    <a th:href="@{|q_and_a/question/detail/${question.id}|}" th:text="${question.title}"></a>
+	                </td>
+	                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+	            </tr>
+	            <tr colspan="3">
+	               <td><a th:href="@{|q_and_a/question/create|}">질문추가</a></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+</html>
