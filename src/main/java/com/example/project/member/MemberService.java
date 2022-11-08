@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Regex;
@@ -59,7 +60,7 @@ public class MemberService {
 			return null;
 		}
 		
-		public Member getMember(String name, String email) {
+		public Member getMemberByNameAndEmail(String name, String email) {
 
 			Optional<Member> oMember = this.memberRepository.findByNameAndEmail(name, email);
 			if(oMember.isPresent()) {
@@ -72,35 +73,98 @@ public class MemberService {
 			return null;
 		}
 
+		public Member getMemberByIdAndEmail(String id, String email) {
+
+			Optional<Member> oMember = this.memberRepository.findByIdAndEmail(id, email);
+			if(oMember.isPresent()) {
+				Member member = oMember.get();
+				
+				return member;
+			}
+			
+			
+			return null;
+		}
 		
-		public String updateMemberPw(HttpSession session, String newPw) {
+		public String updateMemberPw(HttpSession session, String oldPw, String newPw, String newPw2) {
 			
 			Regex regex = new Regex();
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
-			if(regex.regexPw(newPw) == null) {
-				return "regex";
-			}
-
-			Member sessionMember = (Member)session.getAttribute("member");
+			Member member = (Member)session.getAttribute("member");
 			
-			Member member = new Member();
-			Optional<Member> oMember = memberRepository.findById(sessionMember.getId());
-			
-			if(oMember.isPresent()) {
-				member = oMember.get();
-			}
-			
-			if(member.getPw().equals(newPw)) {
-				return "same";
-			}
-			
-
-			member.setPw(newPw);
-						
-			this.memberRepository.save(member);
-			session.setAttribute("member", member);
+			if(encoder.matches(oldPw, member.getPw()) == true) { //현재 비밀번호 확인
+				if(regex.regexPw(newPw) == null) { //비밀번호 양식에 맞지 않는 경우
+					return "regex";
 					
-			return "true";
+				}else if(encoder.matches(newPw, member.getPw())) {//새 비밀번호가 현재 비밀번호와 같은 경우
+					return "same";
+					
+				}else if(!newPw.equals(newPw2)) {//새 비밀번호 확인 오류
+					return "unequal";
+					
+				}else {
+					
+					String secureNewPw = encoder.encode(newPw);
+					
+					
+					Optional<Member> oMember = memberRepository.findById(member.getId());	
+					if(oMember.isPresent()) {
+						Member newMember = new Member();
+						newMember = oMember.get();
+						newMember.setPw(secureNewPw);
+						
+						this.memberRepository.save(newMember);
+						session.setAttribute("member", newMember);
+					
+						return "true";
+					}
+				}
+				
+			}
+			return "oldPwError";
+				
+		}
+		
+		
+		//비밀번호 찾기에서 변경
+		public String updateMemberPw(HttpSession session, String newPw, String newPw2) {
+			
+			Regex regex = new Regex();
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
+			Member member = (Member)session.getAttribute("member");
+			
+
+			if(regex.regexPw(newPw) == null) { //비밀번호 양식에 맞지 않는 경우
+				return "regex";
+					
+			}else if(encoder.matches(newPw, member.getPw())) {//새 비밀번호가 현재 비밀번호와 같은 경우
+				return "same";
+					
+			}else if(!newPw.equals(newPw2)) {//새 비밀번호 확인 오류
+				return "unequal";
+					
+			}else {
+					
+				String secureNewPw = encoder.encode(newPw);
+					
+					
+				Optional<Member> oMember = memberRepository.findById(member.getId());	
+				if(oMember.isPresent()) {
+					Member newMember = new Member();
+					newMember = oMember.get();
+					newMember.setPw(secureNewPw);
+						
+					this.memberRepository.save(newMember);
+					session.setAttribute("member", newMember);
+					
+					return "true";
+				}
+			}
+			
+			return null;
+					
 		}
 		
 		

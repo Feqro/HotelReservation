@@ -30,7 +30,7 @@ public class SignupController {
 	@GetMapping("/signup")
 	public String getSignup(RegMemberForm regMemberForm) {
 		
-		return "member/signup_form";
+		return "member/signupForm";
 	}
 	
 	@PostMapping("/signup")

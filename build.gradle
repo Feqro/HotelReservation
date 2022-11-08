@@ -40,6 +40,14 @@ dependencies {
 	//JSON
 	implementation group: 	'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	
+	
+	//Email 인증
+	implementation 			'org.springframework.boot:spring-boot-starter-mail:2.7.1'
+
+	//타임리프 템플릿엔진
+	implementation 			'org.thymeleaf:thymeleaf:3.0.15.RELEASE'
+
+
 }
 
 tasks.named('test') {

@@ -3,6 +3,7 @@ package com.example.project.member;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class MemberDetailController {
 		model.addAttribute("member", member);
 	
 
-		return "member/member_detail";
+		return "member/memberDetail";
 	}
 	
 	
@@ -41,10 +42,11 @@ public class MemberDetailController {
 	//비밀번호 변경
 	@GetMapping("/updatePw")
 	@ResponseBody
-	public String getUpdatePw(@RequestParam String inputNewPw, HttpSession session) {
+	public String getUpdatePw(@RequestParam String inputOldPw, @RequestParam String inputNewPw, 
+			@RequestParam String inputNewPw2, HttpSession session) {
 		
-		String result = memberService.updateMemberPw(session, inputNewPw);
-		
+		String result = memberService.updateMemberPw(session, inputOldPw, inputNewPw, inputNewPw2);
+
 		return result;
 	}
 	

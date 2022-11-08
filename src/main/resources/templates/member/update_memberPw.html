@@ -1,8 +1,0 @@
-<h4>비밀번호 변경</h4>
-<form th:action="@{/updatepw}" th:object="${updatePw}" th:method="post">
-    <p>
-        <label for="pw">비밀번호: </label>
-        <input type="password" id="pw" th:field="*{updateInput}"><br>
-	</p>
-    <button type="submit">저장</button>
-</form>

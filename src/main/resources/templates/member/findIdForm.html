@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>아이디 찾기</title>
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+</head>
+<body>
+
+	<h4>아이디 찾기</h4>
+	<span>이름</label>			
+	<input type="text" id="name"/><br/>
+		
+	<span>이메일</label>
+	<input type="text" id="email"/>
+		
+	<button type="button" id="getKeyBtn">인증번호 받기</button><br/><br/>
+
+	<div id="keyDiv" style="display: none;">
+		<span>인증번호</label>
+		<input type="text" id="keyInput"/><br/><br/>
+		<button type="button" id="findIdBtn">아이디 찾기</button>
+	</div>
+	
+	<script>
+		
+		var getKeyBtn = document.getElementById('getKeyBtn');
+		var findIdBtn = document.getElementById('findIdBtn');
+		var keyInput = document.getElementById('keyInput');
+		var keyDiv = document.getElementById('keyDiv');
+
+		var name = document.getElementById('name');
+		var email = document.getElementById('email');
+		
+
+
+		getKeyBtn.onclick = function(){
+
+            if(name == ""){
+				alert('이름을 입력해주세요.');
+							
+			}else if(email == ""){
+				alert('이메일을 입력해주세요.');	
+
+			}else{
+                alert('인증번호를 발송했습니다.');
+                keyDiv.style.display="block";
+
+                $.ajax({
+                    url: '/getKey',
+                    data: {
+                        name: $('#name').val(),
+                        email: $('#email').val()
+                    },
+                    success:
+                        console.log('##인증번호 발송##')
+                    ,
+                    error: function(xhr) {
+                        console.log(xhr);
+                        alert(xhr.status + ':' + xhr.statusText);
+                    }
+                })
+            }
+
+
+		}
+		
+		findIdBtn.onclick = function(){
+
+            var keyPattern = /^[0-9]{6}$/;
+
+            if(keyInput == ""){
+                alert('인증번호를 입력해주세요.');
+
+            }else if(!keyPattern.test(keyInput.value)){
+                alert('숫자 6자리를 정확히 입력해주세요.');
+
+            }else {
+
+                $.ajax({
+                    url:'/findIdCheck',
+                    data: {
+                    	
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        keyInput: $('#keyInput').val()
+                        
+                    },
+                    
+                    success:
+                        function(result) {
+                            if(result == "unequal"){
+                            	alert('인증번호가 올바르지 않습니다. 확인 후 다시 입력해 주세요.');
+                            }else if(result == "null"){
+                                alert('계정을 찾을 수 없습니다.');
+                                
+                            }else {
+                                alert('아이디: ' + result);
+                                location.href = "/login";
+                            }
+                        }
+                    ,
+                    error: function(xhr) {
+                        console.log(xhr);
+                        alert(xhr.status + ':' + xhr.statusText);
+                    }
+                })
+            }
+			
+				
+		}
+		
+	</script>
+	
+</body>
+</html>
+
+

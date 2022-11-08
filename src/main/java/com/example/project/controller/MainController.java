@@ -19,25 +19,16 @@ public class MainController {
 		return "main/main";
 	}
 
-	@RequestMapping("/test_session")
-	public String home_test_session(HttpSession session) {
-		
-		Member member = (Member)session.getAttribute("member");
-		
-		System.out.println("member : "+member);
-		session.setAttribute("member", member);
-		return "main/home";
-	}
-
-	
 	@GetMapping("/hotelinfo")
 	public String hotelinfo() {
 		return "main/hotelinfo";
 	}
+	
 	@GetMapping("/roominfo")
 	public String roominfo() {
 		return "main/roominfo";
 	}
+	
 	@GetMapping("/map")
 	public String map() {
 		return "main/map";
