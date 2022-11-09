@@ -86,7 +86,7 @@ public class MemberService {
 			return null;
 		}
 		
-		public String updateMemberPw(HttpSession session, String oldPw, String newPw, String newPw2) {
+		public String changeMemberPw(HttpSession session, String oldPw, String newPw, String newPw2) {
 			
 			Regex regex = new Regex();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -128,7 +128,7 @@ public class MemberService {
 		
 		
 		//비밀번호 찾기에서 변경
-		public String updateMemberPw(HttpSession session, String newPw, String newPw2) {
+		public String changeMemberPw(HttpSession session, String newPw, String newPw2) {
 			
 			Regex regex = new Regex();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -169,7 +169,7 @@ public class MemberService {
 		
 		
 		//이메일 변경
-		public String  updateMemberEmail(HttpSession session, String newEmail) {
+		public String  changeMemberEmail(HttpSession session, String newEmail) {
 
 			Regex regex = new Regex();
 			
@@ -201,7 +201,7 @@ public class MemberService {
 		}
 				
 				
-		public String updateMemberTell(HttpSession session, String newTell) {
+		public String changeMemberTell(HttpSession session, String newTell) {
 
 			Regex regex = new Regex();
 			

@@ -1,6 +1,6 @@
 package com.example.project.reservation;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,13 +19,23 @@ public class Reservation {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESETVATION_SEQ")
     @SequenceGenerator(sequenceName = "reservation_seq", allocationSize = 1, name = "RESETVATION_SEQ")
-    private Integer reservation_no;
-	private String mem_id;
-	private String room_no;
-	private String room_type;
-	private LocalDateTime check_in_date;
-	private LocalDateTime check_out_date;
-	private String pay_y_n;
+    private Integer reservationNo;
+	
+	private String memId;
+	
+	private String roomNo;
+	
+	private String roomType;
+	
+	private LocalDate checkInDate;
+	
+	private LocalDate checkOutDate;
+	
+	private String persons;
+	
+	private int price;
+	
+	private String pay;
 	
 	
 }

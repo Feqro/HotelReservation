@@ -3,27 +3,95 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>비밀번호 찾기</title>
-	
+	<link rel="stylesheet" href="member/base.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
+	<style>
+		.wrap{
+			width: 190px;
+			margin: 150px auto;
+		}
+		
+		input{
+	    	margin: 5px 0;
+	    	height: 25px;
+	    	width: 200px;
+	    	
+	    	border-radius: 4px;
+    		border-color: gray;
+	    	
+		    
+	    }
+	    
+    	button{
+    		margin-left: 23px;
+    		background-color: gainsboro;
+		    display: inline-block;
+		    border-radius: 4px;
+		    border:none;
+		    block-size: 25px;
+		    inline-size: 150px;
+		    font-size: 15px;
+		    cursor: pointer;
+    	}
+    	
+	</style>
+	
 </head>
 <body>
-	<h4>비밀번호 찾기</h4>
-	
-	<span>아이디</label>		
-	<input type="text" id="id"/><br/><br/>
-	
-	<span>이메일</label>	
-	<input type="text" id="email"/>
 
-	<button type="button" id="getKeyBtn">인증번호 받기</button><br/><br/>
-
-	<div id="keyDiv" style="display: none;">
-		<span>인증번호</label>
-		<input type="text" id="keyInput"/><br/><br/>
-		<button type="button" id="findPwBtn">다음</button>
+	<header>
+        <div>
+            <a href="main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
+        </div>
+        <section class="head">
+            <ul>
+                <li><a href="hotelinfo.html" th:href="@{hotelinfo}">호텔 정보</a></li>
+            </ul>
+            <ul>
+                <li><a href="roominfo.html" th:href="@{roominfo}">객실 정보</a></li>
+            </ul>
+            <ul>
+                <th:block th:if="${session.member == null}">
+        				<li><a th:href="@{/login}">로그인</a></li>
+    				</th:block>
+    				<th:block th:if="${session.member != null}">
+        				<p>
+        			
+				            <li><a th:href="@{/memberdetail}">[[${session.member.name}]]</a>님, 환영합니다.<a th:href="@{/logout}"><br>로그아웃</a></li>
+				        </p>
+    				</th:block>
+            </ul>
+            <ul>
+                <li><a href="">예약 확인</a></li>
+            </ul>
+            <ul>
+                <li><a href="map.html" th:href="@{map}">오시는 길</a></li>
+            </ul>
+            <ul>
+                <li><a href="qna.html" th:href="@{question/list}">Q & A</a></li>
+            </ul>
+        </section>
+    </header>
+	<div class="wrap">
+	
+		<h4>비밀번호 찾기</h4>
+		
+		<span>아이디</label>		
+		<input type="text" id="id"/><br/><br/>
+		
+		<span>이메일</label>	
+		<input type="text" id="email"/>
+	
+		<button type="button" id="getKeyBtn">인증번호 받기</button><br/><br/>
+	
+		<div id="keyDiv" style="display: none;">
+			<span>인증번호</label>
+			<input type="text" id="keyInput"/><br/><br/>
+			<button type="button" id="findPwBtn">다음</button>
+		</div>
+		
 	</div>
-	
 
 
 	<script>
@@ -36,10 +104,10 @@
 		
 		getKeyBtn.onclick = function() {
 			
-			if(id == ""){
+			if(id.value == ""){
 				alert('아이디를 입력해주세요.');
 							
-			}else if(email == ""){
+			}else if(email.value == ""){
 				alert('이메일을 입력해주세요.');	
 
 			}else{
@@ -47,14 +115,13 @@
                 keyDiv.style.display="block";
 
                 $.ajax({
-                    url: '/getKeyPw',
+                    url: '/getKeyToFindPw',
                     data: {
                         id: $('#id').val(),
                         email: $('#email').val()
                     },
                     success:
                         console.log('##인증번호 발송##')
-                        //입력하신 아이디를 찾을 수 없습니다.
                     ,
                     error: function(xhr) {
                         console.log(xhr);
@@ -71,7 +138,7 @@
 			
 			var keyPattern = /^[0-9]{6}$/;
 
-            if(keyInput == ""){
+            if(keyInput.value == ""){
                 alert('인증번호를 입력해주세요.');
 
             }else if(!keyPattern.test(keyInput.value)){
@@ -98,7 +165,7 @@
                                 alert('계정을 찾을 수 없습니다.');
                                 
                             }else {
-                                location.href = "/changePw";
+                                location.href = "/changePwFormWithout";
                             }
                         }
                     ,

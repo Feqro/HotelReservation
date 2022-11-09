@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
-        <link rel="stylesheet" href="member/login.css">
+    <link rel="stylesheet" href="member/login.css">
     <link rel="stylesheet" href="member/base.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="member/memberDetail.js"></script>
+    
+    <style>
+    	span{
+    		font-size: 16px;
+    		
+    	}
+    	
+	    input{
+	    	margin: 5px 0;
+	    	height: 30px;
+	    	width: 280px;
+	    	
+	    	border-radius: 4px;
+    		border-color: gray;
+	    	
+		    
+	    }
+    	button{
+    		background-color: gainsboro;
+		    display: inline-block;
+		    border-radius: 4px;
+		    border:none;
+		    block-size: 25px;
+		    inline-size: 150px;
+		    font-size: 15px;
+		    cursor: pointer;
+    	}
+    	.th{
+    		letter-spacing: 1px;
+    		margin-left: 10px;
+    		font-weight: bold;
+    		font-size: 22px;
+    	}
+    </style>
 </head>
 <body>
-<header>
+	<header>
         <div>
-            <a href="/main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
+            <a href="main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
         </div>
         <section class="head">
             <ul>
@@ -34,56 +69,53 @@
                 <li><a href="">예약 확인</a></li>
             </ul>
             <ul>
-                <li><a href="map.html" th:href="map">오시는 길</a></li>
+                <li><a href="map.html" th:href="@{map}">오시는 길</a></li>
             </ul>
             <ul>
-                <li><a href="qna.html" th:href="@{qna}">Q & A</a></li>
+                <li><a href="qna.html" th:href="@{question/list}">Q & A</a></li>
             </ul>
         </section>
     </header>
     <hr>
-    <table>
-        <span>아이디: </span><span th:text="${member.id}"></span><br><br>
-        <span>이름: </span><span th:text="${member.name}"></span><br><br>
-        
-        <div>
-	        <span>비밀번호</span><br/>
-	        
-			<span>현재 비밀번호</span>
-			<input id="inputOldPw" type="password"></input><br/>
-	
-			<span>새 비밀번호</span>
-			<input id="inputNewPw" type="password"></input><br/>
-			
-			<span>새 비밀번호 확인</span>
-			<input id="inputNewPw2" type="password"></input><br/>
-			
-	        <button type="button" id="updatePwBtn">비밀번호 변경</button><br><br>
-        </div>
-		
-        
-        <span>이메일</span><br>
-        <input id="inputNewEmail" type="text" th:value="${member.email}"></input>
-        <button type="button" id="updateEmailBtn">이메일 변경</button><br><br>
-        		        
-        <span>전화번호</span><br>
-        <input id="inputNewTell" type="text" th:value="${member.tell}"></input>
-        <button type="button" id="updateTellBtn">전화번호 변경</button><br>
-                
-    </table>
     
-
+    <div style="width: 320px; margin: 150px auto;">
+	    <table>
+	        <span>아이디: </span><span class="th" th:text="${member.id}"></span><br><br>
+	        <span>이름: </span><span class="th" th:text="${member.name}"></span><br><br>
+	        
+	        <div>
+		        <span>비밀번호</span><br/>
+		        
+				<span>현재 비밀번호</span>
+				<input id="inputOldPw" type="password"></input><br/>
+		
+				<span>새 비밀번호</span>
+				<input id="inputNewPw" type="password"></input><br/>
+				
+				<span>새 비밀번호 확인</span>
+				<input id="inputNewPw2" type="password"></input><br/>
+				
+		        <button type="button" id="changePwBtn">비밀번호 변경</button><br><br>
+	        </div>
+			
+	        
+	        <span>이메일</span><br>
+	        <input id="inputNewEmail" type="text" th:value="${member.email}"></input>
+	        <button type="button" id="changeEmailBtn">이메일 변경</button><br><br>
+	        		        
+	        <span>전화번호</span><br>
+	        <input id="inputNewTell" type="text" th:value="${member.tell}"></input>
+	        <button type="button" id="changeTellBtn">전화번호 변경</button><br>
+	                
+	    </table>
+    </div>
     <script>
+
 
     	//var inputNewPw = document.getElementById('inputNewPw');
     	var inputNewEmail = document.getElementById('inputNewEmail');
     	var inputNewTell = document.getElementById('inputNewTell');
 
-    	
-//    	inputNewPw.addEventListener('focusin', function(){
-//    		inputNewPw.value = null;
-//    	})
-    	
     	inputNewEmail.addEventListener('focusin', function(){
     		inputNewEmail.value = null;
     	})
@@ -92,33 +124,16 @@
     		inputNewTell.value = null;
     	})
     	
-  
-    	/*
-        //foucusout
-    	inputNewPw.addEventListener('focusout', function(){
-    		inputNewPw.value = [[${member.pw}]];
-    	})
-    	
-    	inputNewEmail.addEventListener('focusout', function(){
-    		inputNewEmail.value = [[${member.email}]];
-    	})
-    	
-    	inputNewTell.addEventListener('focusout', function(){
-    		inputNewTell.value = [[${member.tell}]];
-    	})
-    	*/
-    	
-    	
-    	
+
     	
     	
     	//비밀번호 변경
-    	var updatePwBtn = document.getElementById('updatePwBtn');
+    	var changePwBtn = document.getElementById('changePwBtn');
     	
-    	updatePwBtn.onclick = function(){
-//    		var inputOldPw = document.getElementById('inputOldPw');
-//   		var inputNewPw = document.getElementById('inputNewPw');
-//    		var inputNewPw2 = document.getElementById('inputNewPw2');
+    	changePwBtn.onclick = function(){
+    		var inputOldPw = document.getElementById('inputOldPw');
+   			var inputNewPw = document.getElementById('inputNewPw');
+    		var inputNewPw2 = document.getElementById('inputNewPw2');
     		
     		if(inputNewPw.value == ''){
     			alert('변경할 내용이 없습니다.');
@@ -126,7 +141,7 @@
     		}else{
     		
 	    		$.ajax({
-	    			url: '/updatePw',
+	    			url: '/changePwWithOldPw',
 	    			data: {
 	    				inputOldPw: $('#inputOldPw').val(),
 	    				inputNewPw: $('#inputNewPw').val(),
@@ -169,11 +184,11 @@
     	}
     	
     	//이메일 변경
-    	var updateEmailBtn = document.getElementById('updateEmailBtn');
+    	var changeEmailBtn = document.getElementById('changeEmailBtn');
     	
-    	updateEmailBtn.onclick = function(){
+    	changeEmailBtn.onclick = function(){
     		$.ajax({
-    			url: '/updateEmail',
+    			url: '/changeEmail',
     			data: {
     				inputNewEmail: $('#inputNewEmail').val()
     			},
@@ -208,11 +223,11 @@
     	
     	
     	//전화번호 변경
-      	var updateTellBtn = document.getElementById('updateTellBtn');
+      	var changeTellBtn = document.getElementById('changeTellBtn');
     	
-      	updateTellBtn.onclick = function(){
+      	changeTellBtn.onclick = function(){
     		$.ajax({
-    			url: '/updateTell',
+    			url: '/changeTell',
     			data: {
     				inputNewTell: $('#inputNewTell').val()
     			},
@@ -249,8 +264,8 @@
 
 
     
+   
     </script>
-    
     
 </body>
 </html>

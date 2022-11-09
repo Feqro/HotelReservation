@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/question/qna.css">
+    <link rel="stylesheet" href="/question/admin_qna.css">
+    <link rel="stylesheet" href="../main/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="main.html" th:href="@{../main}"><h1>THE HOTEL</h1></a>
+        </div>
+        <section class="head">
+            <ul>
+                <li><a href="hotelinfo.html" th:href="@{../hotelinfo}">호텔 정보</a></li>
+            </ul>
+            <ul>
+                <li><a href="roominfo.html" th:href="@{../roominfo}">객실 정보</a></li>
+            </ul>
+            <ul>
+                <th:block th:if="${session.member == null}">
+        				<li><a th:href="@{/login}">로그인</a></li>
+    				</th:block>
+    				<th:block th:if="${session.member != null}">
+        				<p>
+        			
+				            <li><a th:href="@{/memberdetail}">[[${session.member.name}]]</a>님, 환영합니다.<a th:href="@{../logout}"><br>로그아웃</a></li>
+				        </p>
+    				</th:block>
+            </ul>
+            <ul>
+                <li><a href="">예약 확인</a></li>
+            </ul>
+            <ul>
+                <li><a href="map.html" th:href="@{../map}">오시는 길</a></li>
+            </ul>
+            <ul>
+                <li><a href="qna.html" th:href="@{list}">Q & A</a></li>
+            </ul>
+        </section>
+    </header>
+    <hr>
+    <div>
+    	<div><!-- 달력 --> </div>
+    	<div><!-- 화면 -->
+ 		
+    		<form th:action="@{/info}" method="post">
+	            <h3><span  th:text="${rType.roomType}"></span></h3>
+	            <p>Check In
+	                 <input id="inDate" type="date" th:field="${reservationCreate.checkInDate}">
+	            </p>
+	            <p>Check Out
+	                <input id="outDate" type="date" th:field="${reservationCreate.checkOutDate}">
+	            </p> 
+	        	<p>객실
+	                 <select th:field="${reservationCreate.roomNo}">
+	                  
+	                	<option th:each="room, loop : ${rList}" value="${room.roomNo}" th:text="${room.roomNo}"></option>
+						
+					</select>
+	            </p> 
+	            <p>인원
+	                <select th:field="${reservationCreate.persons}" >
+	                	<option value="1">1</option>
+						<option value="2">2</option>
+						<option th:if="${rType.persons >= 4}" value="3">3</option>
+						<option th:if="${rType.persons >= 4}" value="4">4</option>
+						<option th:if="${rType.persons >= 6}" value="5">5</option>
+						<option th:if="${rType.persons >= 6}" value="6">6</option>
+					</select>
+	            </p> 
+	            <p>금액
+	               <span  th:text="${rType.price}" th:field="${reservationCreate.price}"></span>
+	            </p> 
+
+                <button type="submit">예약하기</button>
+       		</form>
+       		
+		</div>
+    </div>
+    
+    
+   </body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

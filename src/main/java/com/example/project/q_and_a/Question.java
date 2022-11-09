@@ -35,8 +35,7 @@ public class Question {
 	private String content;
 	@CreatedDate
 	private LocalDateTime createDate;
-	 @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
-	 @Transient
-	 private List<Answer> answerList;
+	@Column(length = 2000)
+	private String answer;
 	
 }

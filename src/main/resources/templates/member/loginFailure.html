@@ -11,25 +11,25 @@
 </head>
 
 <body>
-    <header>
+	<header>
         <div>
-            <a href="/main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
+            <a href="main.html" th:href="@{main}"><h1>THE HOTEL</h1></a>
         </div>
         <section class="head">
             <ul>
-                <li><a href="../main/hotelinfo" th:href="@{hotelinfo}">호텔 정보</a></li>
+                <li><a href="hotelinfo.html" th:href="@{hotelinfo}">호텔 정보</a></li>
             </ul>
             <ul>
-                <li><a href="../main/roominfo.html" th:href="@{roominfo}">객실 정보</a></li>
+                <li><a href="roominfo.html" th:href="@{roominfo}">객실 정보</a></li>
             </ul>
             <ul>
                 <th:block th:if="${session.member == null}">
         				<li><a th:href="@{/login}">로그인</a></li>
     				</th:block>
     				<th:block th:if="${session.member != null}">
-        				<p>[[${session.member.name}]]님, 환영합니다.</p>
         				<p>
-				            <li><a th:href="@{/main}">로그아웃</a></li>
+        			
+				            <li><a th:href="@{/memberdetail}">[[${session.member.name}]]</a>님, 환영합니다.<a th:href="@{/logout}"><br>로그아웃</a></li>
 				        </p>
     				</th:block>
             </ul>

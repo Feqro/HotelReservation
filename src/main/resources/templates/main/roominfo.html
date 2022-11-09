@@ -44,7 +44,7 @@
         </section>
     </header>
     <hr>
-    <section class="body">
+     <section class="body">
         <div>
             <h2>
                 객실정보
@@ -93,6 +93,7 @@
             </tr>
         </section>
         <footer>
+        <form>
             <section class="foot_text">
                 <div id="foot_header">
                     Superior Double
@@ -106,27 +107,55 @@
                     <h3>객실 개요</h3>
                     <div class="room1">
                         <ol>
-                            <li>침대타입<span>더블</span></li>
-                            <li>수용인원<span>2명</span></li>
-                            <li>흡연가능 여부<span>전객실 금연</span></li>
+                            <li class="bed">침대타입<span class="bed_type"> 더블</span></li>
+                            <li class="room_size">객실크기<span class="room_type"> 28㎡</span></li>
+                            <li class="check_in">　체크인<span>　15:00</span></li>
                         </ol>
                     </div>
                     <div class="room2">
                         <ol>
-                            <li>객실크기<span>28㎡</span></li>
-                            <li>전망<span>시티뷰</span></li>
+                            <li>수용인원<span class="person">2명</span></li>
+                            <li>　전망<span class="view">　　시티뷰</span></li>
+                            <li>　체크아웃<span>11:00</span></li>
                         </ol>
                     </div>
                     <div class="room3">
                         <ol>
-                            <li>체크인<span>15:00</span></li>
-                            <li>체크아웃<span>11:00</span></li>
+                            <li>흡연가능여부<span>전객실 금연</span></li>
                         </ol>
                     </div>
                 </div>
                 <hr>
+                <div class="roominfo_ather">
+                    <h3>어매니티</h3>
+                    <div class="ather1">
+                    <ol>
+                        <h4>BEDROOM</h4>
+                        <li><span>TV (45″ 이상), 무료 Wi-Fi, 에어컨, 개별 온도조절 장치, 전화기, 미니 냉장고, 생수,<br>
+                            　　　머그컵, 커피&차, 전기포트, 테이블&소파, 옷장, 옷걸이, 슬리퍼,   금고, 책상&의자</span></li>
+                    </ol>
+                    </div>
+                    <div class="ather2">
+                        <ol>
+                            <h4>BATHROOM</h4>
+                            <li><span>샤워부스, 비데, 목욕가운, 페이스&배스 타월, 비누, 샴푸&컨디셔너, 샤워 캡,<br>
+                                　　　　　　　   바디샤워젤, 바디스펀지, 바디로션, 거울, 칫솔세트, 코튼세트, 면도기, 헤어 드라이어</span></li>
+                        </ol>
+                        </div>
+                </div>
+                <hr>
+                <div class="hotel_info">
+                    <div class="select_room">
+                        <h5>객실 예약</h5><span>TEL</span> 051-000-0000　<span>EMAIL</span> hotel@naver.com
+                    </div>
+                    <div class="buy">
+                        <a id="btnReservation" >예약하기</a>
+                    </div>
+                </div>
             </section>
+            
         </footer>
+        
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
         <script>
@@ -138,7 +167,14 @@
                 "주니어스위트룸은 보다 큰 면적과 구성을 통해 쾌적하고 편안한 잠자리를 선사하는 공간입니다.",
                 "로열스위트룸은 가장 럭셔리한 공간으로 숙박 하시는 고객님의 품격있는 하루를 책임지겠습니다."
             ];
-
+            var c = [" 더블", "2 싱글", " 더블","1 더블 + 1 싱글", "1 퀸 + 1 싱글", "1 킹 + 1 싱글"];
+            var d = ["2명", "2명", "2명", "3명", "3명","3명"];
+            var e = ["28㎡","28㎡","31.4㎡","31.4㎡","44.9㎡","85.9㎡"];
+            var f = ["　　시티뷰 ","　　시티뷰 ","　　시티뷰 ","　　파크뷰 ","　　파크뷰 ","　　파크뷰 "];
+			
+            var pos = 0;
+            
+            
             $(document).ready(function () {
                 $('.slick').slick({
                     //autoplay: true, // 자동 스크롤 사용 여부
@@ -147,15 +183,28 @@
                     dots: true,
                 });
                 $('.slick').on('afterChange', function (event, slick, currentSlide) {
-                    console.log(currentSlide);
+                	pos=currentSlide;
                     $('#foot_header').html(a[currentSlide]);
                     $('#foot_subtext').html(b[currentSlide]);
                 });
-
+                $('.slick').on('afterChange', function (event,slick,currentSlide)
+                {
+                    $('.bed_type').html(c[currentSlide]);
+                    $('.person').html(d[currentSlide]);
+                    $('.room_type').html(e[currentSlide]);
+                    $('.view').html(f[currentSlide]);
+                })
+                $('#btnReservation').on('click',function(e){
+                	var loc = 'reservation/info/' + a[pos];
+                	e.preventDefault();
+                	location.href=loc;
+                	
+                	
+                })
             });
         </script>
-        <script>
-        </script>
+        
+        
 </body>
 
 </html>

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.project.Alert;
 import com.example.project.Regex;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class SignupController {
 	@PostMapping("/signup")
 	public String postSignup(@Valid RegMemberForm regMemberForm, Member member, HttpServletResponse response) {
 		
-		Alert alert = new Alert();
+
 		Regex regex = new Regex();
 		String inputId = regex.regexEngNum(regMemberForm.getId());
 		

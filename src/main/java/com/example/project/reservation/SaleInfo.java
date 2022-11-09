@@ -17,14 +17,14 @@ import lombok.Setter;
 public class SaleInfo {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALE_SEQ")
-    @SequenceGenerator(sequenceName = "sale_seq", allocationSize = 1, name = "SALE_SEQ")
-    private Integer sale_no;
+    @SequenceGenerator(sequenceName = "saleSeq", allocationSize = 1, name = "SALE_SEQ")
+    private Integer saleNo;
 	
 	private String reservation;
 	
-	private String mem_id;
+	private String memId;
 	
 	private String pay;
 	
-	private LocalDateTime sale_date;
+	private LocalDateTime saleDate;
 }

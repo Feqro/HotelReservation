@@ -30,8 +30,8 @@ public class FindAccountController {
 		return "member/findIdForm";
 	}
 	
-	//인증 메일 전송
-	@GetMapping("/getKey")
+	//아이디 찾기 - 인증 메일 전송
+	@GetMapping("/getKeyToFindId")
 	@ResponseBody
 	public void getKey(@RequestParam("name") String name, @RequestParam("email") String email) throws Exception {
 		Member member = memberService.getMemberByNameAndEmail(name, email);
@@ -68,9 +68,9 @@ public class FindAccountController {
 	
 	
 	
-	//--------------------------------------------------
-	//비밀번호 찾기
+	//-------------------------비밀번호 찾기-------------------------//
 	
+
 	@GetMapping("/findPw")
 	public String getFindPw() {
 		
@@ -78,8 +78,8 @@ public class FindAccountController {
 		
 	}
 	
-	//인증 메일 전송
-	@GetMapping("/getKeyPw")
+	//비밀번호 찾기 - 인증 메일 전송
+	@GetMapping("/getKeyToFindPw")
 	@ResponseBody
 	public void getKeyPw(@RequestParam("id") String id, @RequestParam("email") String email) throws Exception {
 		Member member = memberService.getMemberByIdAndEmail(id, email);
@@ -116,28 +116,28 @@ public class FindAccountController {
 		
 	}
 	
-	@GetMapping("/changePw")
+	@GetMapping("/changePwFormWithout")
 	public String getChangePw(HttpSession session) {
 		Member sessionMember = (Member)session.getAttribute("member");
 		log.info("####changePw의 session의 member: " + sessionMember.getId());
 		
-		return "member/changePw";
+		return "member/changePwWithoutOldPw";
 	}
 	
 	//비밀번호 찾기에서 변경
-	@GetMapping("/changePw2")
+	@GetMapping("/changeWithoutOldPwCheck")
 	@ResponseBody
-	public String getUpdatePw(@RequestParam String inputNewPw, 
+	public String getchangePw(@RequestParam String inputNewPw, 
 			@RequestParam String inputNewPw2, HttpSession session) {
 		
-		String result = memberService.updateMemberPw(session, inputNewPw, inputNewPw2);
+		String result = memberService.changeMemberPw(session, inputNewPw, inputNewPw2);
 		
 		
 		return result;
 	}
 	
 	@GetMapping("/changePwSuccess")
-	public String getUpdatePw(HttpSession session) {
+	public String getchangePw(HttpSession session) {
 		session.invalidate();
 
 		return "redirect:/login";

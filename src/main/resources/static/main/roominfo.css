@@ -173,7 +173,7 @@ img {
     transition: 0.3s;
 }
 
-#foot_header{
+#foot_header {
     position: absolute;
     font-size: 30px;
     left: 308px;
@@ -182,40 +182,200 @@ img {
     color: #fff;
     box-shadow: 3px;
     transition: 0.3s;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     block-size: 120px;
     padding-top: 30px;
     inline-size: 1300px;
 
 }
 
-#foot_subtext{
+#foot_subtext {
     position: absolute;
     bottom: 50px;
     left: 620px;
     color: #fff;
 }
 
-.foot_roominfo{
+.foot_roominfo {
     block-size: 500px;
 
 }
 
-.roominfo_room h3{
+.roominfo_room h3 {
     position: absolute;
     left: 400px;
 }
 
-.roominfo_room div{}
-.roominfo_room div tr{}
-.roominfo_room div tr td{}
+.roominfo_room {
+    position: relative;
+    padding-bottom: 200px;
+}
+
+.roominfo_room div tr {}
+
+.roominfo_room div tr td {}
 
 
-.room1{background-color: bisque;}
+.room1 {
+    position: relative;
+}
 
-.room1 ol{}
-.room1 ol li{}
-.room1 ol li span{}
+.foot_roominfo hr {
+    width: 61%;
+}
 
-.room2{background-color: blanchedalmond;}
-.room3{ background-color: aqua;}
+.room1 ol {}
+
+.room1 ol li {
+    font-weight: bold;
+}
+
+.room1 ol li span {
+    font-weight: normal;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.room2 {
+    position: absolute;
+    left: 600px;
+    top: 26px;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.room2 ol li span {
+    font-weight: normal;
+    padding-left: 50px;
+    padding-right: 41px;
+}
+
+.room3 {
+    position: absolute;
+    left: 600px;
+    top: 113px;
+    font-weight: bold;
+}
+
+.room3 ol li span {
+    font-weight: normal;
+    padding-left: 18px;
+}
+
+
+.roominfo_ather {
+    position: relative;
+    margin-bottom: 270px;
+}
+
+.roominfo_ather H3 {
+    position: absolute;
+    left: 400px;
+}
+
+
+.bed{position: absolute; left: 903px; top: 15px;}
+
+.room_size{position: absolute; left: 640px; top: 15px;}
+
+.check_in{position: absolute; left: 1175px; top: 15px;}
+
+
+
+.ather1 {}
+
+.ather1 ol {
+    position: absolute;
+    left: 600px;
+    top: -20px;
+}
+
+.ather1 ol h4 {
+    text-align: left;
+    padding-left: 70px;
+}
+
+.ather1 ol li {
+    font-weight: bold;
+}
+
+.ather1 ol li span {
+    font-weight: normal;
+}
+
+.ather2 {}
+
+.ather2 ol {
+    position: absolute;
+    left: 548px;
+    top: 80px;
+}
+
+.ather2 ol h4 {
+    text-align: left;
+    padding-left: 120px;
+    padding-top: 20px;
+}
+
+.ather2 ol li {}
+
+.ather2 ol li span {}
+
+.hotel_info {
+    padding-top: 40px;
+    padding-left: 225px;
+    block-size: 150px;
+    inline-size: 1200px;
+}
+
+
+.select_room {
+    display: inline-block;
+    background-color: teal;
+    padding-left: 20px;
+    color: #fff;
+    text-align: center;
+    padding-right: 250px;
+}
+.buy{
+    position: absolute;
+    block-size: 90px;
+    inline-size: 5px;
+    padding-right: 150px;
+    display: inline-block;
+    background-color: teal;
+    padding-left: 50px;
+}
+
+.hotel_info h5 {
+    display: inline-block;
+    padding-right: 155px;
+    font-size: 19px;
+}
+
+.hotel_info span {
+    font-weight: bold;
+    margin-left: 25px;
+}
+
+.hotel_info a {
+    position: absolute;
+    top: 20px;
+    list-style: none;
+    block-size: 50px;
+    text-decoration: none;
+    background-color:#fff;
+    color: teal;
+    inline-size: 135px;
+    font-weight: bold; 
+    border: 2px solid darkcyan;
+    line-height: 45px;
+}
+
+.hotel_info a:hover {
+    color: #fff;
+    background-color: teal;
+    transition: 0.5s;
+    border: 1px solid #fff;
+}
+

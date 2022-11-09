@@ -1,5 +1,6 @@
 package com.example.project.room;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,17 +12,18 @@ import lombok.Setter;
 @Entity
 public class RoomType {
 	@Id
-	private String room_type;
+	@Column(unique=true) 
+	private String roomType;
 	
-	private String bed_size;
+	private String bedSize;
 	
-	private String persons;
+	private int persons;
 	
-	private String room_size;
+	private String roomSize;
 	
-	private String room_view;
+	private String roomView;
 	
-	private String room_explain;
+	private String roomExplain;
 	
 	private int price;
 	

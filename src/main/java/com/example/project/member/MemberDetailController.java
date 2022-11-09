@@ -40,31 +40,31 @@ public class MemberDetailController {
 	//--------------------------------------------------
 	
 	//비밀번호 변경
-	@GetMapping("/updatePw")
+	@GetMapping("/changePwWithOldPw")
 	@ResponseBody
-	public String getUpdatePw(@RequestParam String inputOldPw, @RequestParam String inputNewPw, 
+	public String getchangePw(@RequestParam String inputOldPw, @RequestParam String inputNewPw, 
 			@RequestParam String inputNewPw2, HttpSession session) {
 		
-		String result = memberService.updateMemberPw(session, inputOldPw, inputNewPw, inputNewPw2);
+		String result = memberService.changeMemberPw(session, inputOldPw, inputNewPw, inputNewPw2);
 
 		return result;
 	}
 	
 	//이메일 변경
-	@GetMapping("/updateEmail")
+	@GetMapping("/changeEmail")
 	@ResponseBody
-	public String getUpdateEmail(@RequestParam String inputNewEmail, HttpSession session) {
-		String result = memberService.updateMemberEmail(session, inputNewEmail);
+	public String getchangeEmail(@RequestParam String inputNewEmail, HttpSession session) {
+		String result = memberService.changeMemberEmail(session, inputNewEmail);
 		
 		
 		return result;
 	}
 	
 	//전화번호 변경
-	@GetMapping("/updateTell")
+	@GetMapping("/changeTell")
 	@ResponseBody
-	public String getUpdateTell(@RequestParam String inputNewTell, HttpSession session) {
-		String result = memberService.updateMemberTell(session, inputNewTell);
+	public String getchangeTell(@RequestParam String inputNewTell, HttpSession session) {
+		String result = memberService.changeMemberTell(session, inputNewTell);
 		
 		
 		return result;
